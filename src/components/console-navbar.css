@@ -1,0 +1,6 @@
+@import "navbar.css";
+
+.nav-avatar-dropdown {
+  border-style: hidden;
+  background-color: transparent;
+}
