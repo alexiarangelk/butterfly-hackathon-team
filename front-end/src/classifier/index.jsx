@@ -21,26 +21,6 @@ const Classifier = () => {
   
     getCameraStream();
   }, []);
-
-  const playCameraStream = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  };
-
-  const captureImageFromCamera = () => {
-    const context = canvasRef.current.getContext('2d');
-    const { videoWidth, videoHeight } = videoRef.current;
-
-    canvasRef.current.width = videoWidth;
-    canvasRef.current.height = videoHeight;
-
-    context.drawImage(videoRef.current, 0, 0, videoWidth, videoHeight);
-
-    canvasRef.current.toBlob((blob) => {
-      imageRef.current = blob;
-    })
-  };
   
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -66,15 +46,36 @@ const Classifier = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const playCameraStream = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const captureImageFromCamera = () => {
+    const context = canvasRef.current.getContext('2d');
+    const { videoWidth, videoHeight } = videoRef.current;
+
+    canvasRef.current.width = videoWidth;
+    canvasRef.current.height = videoHeight;
+
+    context.drawImage(videoRef.current, 0, 0, videoWidth, videoHeight);
+
+    canvasRef.current.toBlob((blob) => {
+      imageRef.current = blob;
+    })
+  };
+
   return (
     <>
-      <h1>Image classifier</h1>
-      <div>
-        <video ref={videoRef} />
-      </div>
-      <video ref={videoRef} onCanPlay={() => playCameraStream()} />
-      <canvas ref={canvasRef} hidden></canvas>
-      <p>{result}</p>
+      <header>
+        <h1>Image classifier</h1>
+      </header>
+      <main>
+        <video ref={videoRef} onCanPlay={() => playCameraStream()} id="video" />
+        <canvas ref={canvasRef} hidden></canvas>
+        <p>Currently seeing: {result}</p>
+      </main>
     </>
   )
 };

@@ -40,8 +40,6 @@ def classifyImage(file):
     preds = getPrediction(file, model)
     score = tf.nn.softmax(preds[0])
 
-    result = (
-        "This image most likely belongs to {} with a {:.2f} percent confidence."
-        .format(imageLabels.iloc[np.argmax(score), 0], 100 * np.max(score)))
+    result = (imageLabels.iloc[np.argmax(score), 0]) + (100 * np.max(score))
 
     return result
