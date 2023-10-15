@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Map{% endblock %}
+
+{% block content %}
+<style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style>
+
+<div class="container-full" style="width: 100%; height: 100%;">
+    <div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="ButterfAI" src="//ufl.maps.arcgis.com/apps/Embed/index.html?webmap=a8483651a58b444cbef84c81f2272262&extent=-141.8699,13.3007,-53.0125,59.2079&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&legendlayers=true&disable_scroll=true&theme=light"></iframe></div>
+</div>
+
+
+
+{% endblock %}

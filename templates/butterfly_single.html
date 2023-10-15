@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ dex['Butterfly'] }}{% endblock %}
+
+{% block content %}
+
+<style>
+
+
+</style>
+
+<div class="container">
+<div class="row">
+    
+    <img src="../static/images/{{ butterfly['Image'] }}" alt="Butterfly Image">
+    <table>
+        {% for key, value in butterfly.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+
+
+
+{% endblock %}

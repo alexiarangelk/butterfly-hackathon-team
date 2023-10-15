@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ dex['Butterfly'] }}{% endblock %}
+
+{% block content %}
+
+<style>
+
+
+</style>
+
+<div class="container">
+<div class="row">
+
+  {% for dex in dex %}
+    <div class="card col-md-3" id="{{ dex['Butterfly'] }}" style="margin: 10px;">
+        <a href="{{ url_for('butterfly_page', butterfly=dex['Butterfly']) }}">
+            <img class="card-img-top" src="{{ url_for('static', filename='images/' + dex['Image']) }}" width="250px">
+        </a>
+        <div class="card-body">
+            <a href="{{ url_for('butterfly_page', butterfly=dex['Butterfly']) }}">
+                <h5 class="card-title"> {{ dex['Butterfly'] }}</h5>
+            </a>
+            <p class="card-text">{{ dex['Family'] }}</p>
+        </div>
+    </div> 
+{% endfor %}
+</div>
+
+
+{% endblock %}
