@@ -16,9 +16,6 @@ Butterfly AI
 `Provide a short tagline for the project.`
 What is that? A butterfly, hopefully! Butterfly AI is an application that utilizes machine learning to identify and provide additional information on various butterfly species.
 
-
----
-
 ## 🔎 Project Story
 ### > 🌼 About the project
 
