@@ -1,4 +1,4 @@
-# butterfly-hackathon-team
+# 🦋 butterfly-hackathon-team 🦋
 2023 AI Hackathon Butterfly + Flower model app team!
 Alexia Rangel Krashenitsa
 Jay Rosen
@@ -86,9 +86,3 @@ JPG, PNG or GIF format, 5 MB max file size. For best results, use a 3:2 ratio.
 
 ### Video demo link
 
-    c. Website process
-3. Florida Museum Demo
-
-
-### Notes
-* Video has to be 3 min
