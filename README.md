@@ -29,6 +29,12 @@ Naturally, the development of a butterfly application requires a lot of butterfl
 
 The model was developed using Tenserflow / Keras in Google Colab. It is a deep-learning image classifier for butterflies and moths. We used our filtered initial dataset with Florida Butterflies and moths to train the model. The final model had 85.40% accuracy. 
 
+#### Map Development
+The map was developed using ArcGIS Pro. For the data, GBIF was used to find a large dataset of butterfly species locations. After sorting though the relevant data, the map and feature layers were hosted on ArcGIS Online and ArcGIS API was used to embed the map.
+
+#### Webapp Development
+
+
 #### Challenges
 
 We encountered our biggest challenges with model training and React. The butterfly dataset we found had many species, but not many images for each species. This resulted in our fitted model being overfitted, with a high training accuracy but a low validation accuracy. A lot of time was spent refining this model until the accuracy was high enough to identify new, untrained images correctly. React was our initial idea for a web app, but it came with a lot of challenges. We had issues starting up the webapp on different laptops and integrating the model into the front-end. 
