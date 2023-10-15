@@ -1,39 +1,29 @@
 {
-  "name": "cybersamx-react-bootstrap",
+  "name": "front-end",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.3.0",
-    "bootstrap": "^5.3.2",
-    "history": "^5.1.0",
-    "jdenticon": "^3.1.1",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
-    "react-hook-form": "^7.33.1",
-    "react-router-dom": "^6.16.0",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1"
-  },
-  "resolutions": {
-    "**/**/immer": "^9.0.6"
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start:server-dev": "concurrently \"npm start\" \"cross-env FLASK_ENV=development FLASK_APP=../back-end/app.py python -m flask run\"",
+    "start:server-prod": "rm -rf ../backend/templates && rm -rf ../backend/static && npm run build && cross-env FLASK_ENV=production FLASK_APP=../backend/app.py flask run",
+    "build": "react-scripts build && mv build ../backend && mv ../backend/build/static ../backend && mv ../backend/build ../backend/templates",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js src/**/*.jsx"
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -46,5 +36,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "cross-env": "^7.0.3"
   }
 }
