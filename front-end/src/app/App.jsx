@@ -15,6 +15,7 @@ import Users from '../pages/Users';
 import Settings from '../pages/Settings';
 import AuthProvider from '../hooks/AuthProvider';
 import Camera from '../pages/Camera';
+import Home from '../pages/Home';
 import Dex from '../pages/Dex';
 import ViewButterfly from '../pages/ViewButterfly';
 
@@ -24,10 +25,10 @@ function App() {
       <AuthProvider>
         <Routes>
         <Route path="/" element={<ConsoleLayout />}>
-            <Route path="" element={<Login />} />
+            <Route path="home" element={<Home />} />
             <Route path="camera" element={<Camera />} />
             <Route path="butterfly/:id" element={<ViewButterfly />} />
-        <Route path="dex" element={<Dex />} />
+            <Route path="dex" element={<Dex />} />
             <Route path="login" element={<Login />} />
             <Route path="logout" element={<Logout />} />
             <Route path="signup" element={<Signup />} />
@@ -44,7 +45,7 @@ function App() {
             <Route path="not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" />} />
           </Route> */}
-          <Route path="console" element={<ConsoleLayout />}>
+            <Route path="console" element={<ConsoleLayout />}>
             <Route path="" element={<Dashboard />} />
             <Route path="camera" element={<Camera />} />
             <Route path="dex" element={<Dex />} />

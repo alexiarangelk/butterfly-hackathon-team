@@ -28,7 +28,7 @@ function ConsoleLayout() {
     );
   }
 
-  return <Navigate to={`/login?redirect=${encodeURIComponent(pathname)}`} replace />;
+  // return <Navigate to={`/home`} replace />;
 }
 
 export default ConsoleLayout;
