@@ -9,20 +9,18 @@ Sonya Babski
 - Using Github for project tracking, collaboration, and organization
 - Butterfly + flower identification classification model will be created with python
 
-## Project Name:
+## 🔎 Project Name:
 Butterfly AI
 
-## Elevator Pitch: 
+## 🔎 Elevator Pitch: 
 `Provide a short tagline for the project.`
 What is that? A butterfly, hopefully! Butterfly AI is an application that utilizes machine learning to identify and provide additional information on various butterfly species.
 
 
 ---
 
-
-# Project details
-## Project Story
-### About the project
+## 🔎 Project Story
+### > 🌼 About the project
 
 #### About
 Despite rarely being thought about, entomology is one of the most prevalent fields in everyday life. Over 150 species of butterfly are native to Florida but over 115,000 species of lepidoptera have been described globally. Identification apps have become crucial tools to those in the field of entomology or even to the curious hiker, but they aren't always the most user friendly for finding specific information. Thus, we were inspired to develop a tool that people can use to not only identify butterflies, but also extract specific information through the use of a chat feature to simplify the current encyclopedia format most apps currently use as well as store user-specific information of recorded sightings for future reference.
@@ -42,7 +40,7 @@ We encountered our biggest challenges with model training and React. The butterf
 
 Our vision with this project is to expand our web app to include more accurate image classification, more species of butterflies, moths, and other insects and aracnids, and a more specialized image identification about the bug (like diseases, environments, age, and more). Our initial idea also included a chat app, which would activate after a butterfly/moth was classified. This chatapp would be open to specific questions about the identified butterfly. Chat history and location of the specific butterfly/moth would be recorded.
 
-### Built with
+### > 🌼 Built with
 **Languages:**
 Python
 Flask
@@ -67,13 +65,13 @@ ArcGIS Pro
 Leaflet JS Library
 
 
-### "Try it out" links
+### > 🌼 "Try it out" links
 [Github Repository](https://github.com/alexiarangelk/butterfly-hackathon-team)
 [Model Process Document](https://github.com/alexiarangelk/butterfly-hackathon-team/blob/main/Butterfly%20Image%20Classifier%20Process.md)
 
 
-## Project Media
-### Image gallery
+## 🔎 Project Media
+### > 🌼Image gallery
 ```
 JPG, PNG or GIF format, 5 MB max file size. For best results, use a 3:2 ratio.
 ```
@@ -84,5 +82,5 @@ JPG, PNG or GIF format, 5 MB max file size. For best results, use a 3:2 ratio.
 ![](https://hackmd.io/_uploads/r12MRhKZT.png)
 ![](https://hackmd.io/_uploads/B1N70nFW6.png)
 
-### Video demo link
+### > 🌼Video demo link
 
