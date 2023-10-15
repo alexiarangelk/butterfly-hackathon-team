@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ButterfAI</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+    <style>
+      html,
+      body,
+      #map {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        color: #323232;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Load Leaflet Label from GitHub -->
+    <script src="https://leaflet.github.io/Leaflet.label/leaflet.label.js"></script>
+    <!-- Load Esri Leaflet Renderers from CDN -->
+    <script src="https://cdn.jsdelivr.net/leaflet.esri.renderers/2.0.2/esri-leaflet-renderers.js"></script>
+    <!-- Load Vector Icon from GitHub -->
+    <script src="https://muxlab.github.io/Leaflet.VectorIcon/L.VectorIcon.js"></script>
+    <!-- Load Leaflet Omnivore -->
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js"></script>
+    <!-- Load L.esri.WebMap -->
+    <script src="https://cdn.jsdelivr.net/leaflet.esri.webmap/0.4.0/esri-leaflet-webmap.js"></script>
+    <div id="map"></div>
+    <script>
+      const apiKey = "AAPK4c97b520f55e44409b071e6a9da641a1PDuUrIsgV5tzOOBot0fD0rdwWJVVfJES-w77TFY8jUUk9PdQReyDMzcttzl_5rCZ";
+
+      const webmapId = "a8483651a58b444cbef84c81f2272262"; // Default WebMap ID
+      getIdfromUrl();
+
+      const webmap = L.esri.webMap(webmapId, { map: L.map("map") });
+      
+      
+     //var species_name = "Atlides_halesus"; 
+      //This would be "input" for user
+      
+
+      webmap.on("load", function () {
+        const overlayMaps = {};
+        webmap.layers.forEach(function (l) {
+          overlayMaps[l.title] = l.layer;
+        });
+         //"species_name".layer.addTo(webmap._map); 
+        //name is matched to layer and layer is added to webmap
+       L.control //delete after auto-layer adder is working
+          .layers({}, overlayMaps, {
+            position: "bottomleft"
+          })
+          .addTo(webmap._map);
+      });
+
+      function getIdfromUrl() {
+        const urlParams = location.search.substring(1).split("&");
+        for (let i = 0; urlParams[i]; i++) {
+          const param = urlParams[i].split("=");
+          if (param[0] === "id") {
+            webmapId = param[1];
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
