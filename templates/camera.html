@@ -9,6 +9,8 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -22,16 +24,14 @@
 <div class="mt-5 text-center">
 
 </div>
-<div id="webcam-container"></div>
-<div id="image-container"></div>
-
-
+<div id="webcam-container" >
+    <img id="start-camera" style="border: 1px black solid" src="./static/images/start-camera.png" width="300" height="300"  alt="Image preview..."/>
+    
+</div>
 
 
 <div class="text-center mt-3">
 <button class="btn btn-primary mr-2" id="camera" onclick="initCamera()" type="button">Camera</button>
-<button class="btn btn-secondary" id="uploadImage" onclick="uploadImage()" type="button">Upload</button>
-<input id="upload" onchange="handleImageUpload(event)" style="display:none;" type="file"/>
 <div class="mb-5" id="label-container" style="text-align:center; font-size: 36px"></div>
 
 <!-- Table -->
@@ -66,6 +66,8 @@
         window.requestAnimationFrame(loop);
 
         document.getElementById("webcam-container").appendChild(webcam.canvas);
+          // Hide the start-camera image
+    document.getElementById("start-camera").style.display = "none";
     }
 
     async function loop() {
@@ -209,7 +211,7 @@ button.classList.add('btn', 'btn-primary'); // Add Bootstrap classes for styling
 
         // Create additional HTML
         let additionalHTML = document.createElement('div');
-       // additionalHTML.innerHTML = '<p>Additional HTML goes here</p>';
+        additionalHTML.innerHTML = '<p style="margin: 25px;"><img src="./static/images/' + encodeURIComponent(butterflyName) + '.jpg"></p>';
 
         // Append the button, the additional HTML, and the table to the container
         let container = document.getElementById('info-container');

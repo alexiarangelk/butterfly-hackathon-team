@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, redirect,  send_from_director
 import csv
 import pandas as pd
 import json
+import os
 
 app = Flask(__name__)
 
 # Load websites data from CSV file
 def load_dex():
     dex = []
-    with open('butterfly_dex.csv', newline='') as csvfile:
+    with open(os.path.join(os.path.dirname(__file__), 'butterfly_dex.csv'), newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             dex.append(row)
@@ -46,11 +47,23 @@ def butterfly_page(butterfly):
 
 @app.route('/camera')
 def camera():
-    df = pd.read_csv('butterfly_dex.csv')
-    df.fillna('N/A', inplace=True)  # Replace NaN values with 'N/A'
-    dex = df.to_dict(orient='records')
-    return render_template('camera.html', dex=json.dumps(dex))
+    dex = []
+    with open(os.path.join(os.path.dirname(__file__), 'butterfly_dex.csv'), newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            dex.append(row)
+    dex = json.dumps(dex)  # Convert the dex list to a JSON string
+    return render_template('camera.html', dex=dex)
 
+@app.route('/upload')
+def upload():
+    dex = []
+    with open(os.path.join(os.path.dirname(__file__), 'butterfly_dex.csv'), newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            dex.append(row)
+    dex = json.dumps(dex)  # Convert the dex list to a JSON string
+    return render_template('upload.html', dex=dex)
 
 @app.route('/map')
 def map():
@@ -90,8 +103,7 @@ def serve_image(filename):
     return send_from_directory('images', filename)
 
 
-
 if __name__ == '__main__':
 #   app.run(debug=True)
-    app.run(debug=True, host="0.0.0.0", port=3000)
+    app.run(debug=True, host="0.0.0.0", port=3000, ssl_context='adhoc')
 
