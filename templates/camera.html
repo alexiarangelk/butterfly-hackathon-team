@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+
+{% block title %}{{ dex['Butterfly'] }}{% endblock %}
+
+{% block content %}
+<style>
+.container img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<div class="container">
+<div class="row">
+
+
+<body class="bg-light">
+<div class="container">
+<div class="mt-5 text-center">
+
+</div>
+<div id="webcam-container" >
+    <img id="start-camera" style="border: 1px black solid" src="./static/images/start-camera.png" width="300" height="300"  alt="Image preview..."/>
+    
+</div>
+
+
+<div class="text-center mt-3">
+<button class="btn btn-primary mr-2" id="camera" onclick="initCamera()" type="button">Camera</button>
+<div class="mb-5" id="label-container" style="text-align:center; font-size: 36px"></div>
+
+<!-- Table -->
+<div id="info-container"></div>
+</div>
+</div>
+<script>
+   
+</script>
+<script type="text/javascript">
+    const URL = "./static/Butterfly_training/";
+
+    let model, webcam, labelContainer, maxPredictions;
+
+    async function loadModel() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        labelContainer = document.getElementById("label-container");
+    }
+
+    async function initCamera() {
+        await loadModel();
+
+        const flip = true;
+        webcam = new tmImage.Webcam(1080, 1080, flip);
+        await webcam.setup();
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+          // Hide the start-camera image
+    document.getElementById("start-camera").style.display = "none";
+    }
+
+    async function loop() {
+        webcam.update();
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    async function predict() {
+        const prediction = await model.predict(webcam.canvas);
+        displayPredictions(prediction);
+    }
+
+    function displayPredictions(prediction) {
+        let maxProbability = -1;
+        let bestPrediction = "";
+
+        for (let i = 0; i < maxPredictions; i++) {
+            if (prediction[i].probability > maxProbability) {
+                maxProbability = prediction[i].probability;
+                bestPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            }
+        }
+
+        labelContainer.innerHTML = bestPrediction;
+        
+         // Check if the best prediction matches a butterfly in the dex CSV
+          let dex = JSON.parse('{{ dex | safe }}');
+   
+
+// Extract the butterfly name from the prediction and convert to uppercase
+let butterflyName = bestPrediction.split(':')[0].trim().toUpperCase();
+
+    // Check if the butterfly name matches a butterfly in the dex CSV
+    let butterflyInfo = dex.find(butterfly => butterfly.Butterfly === butterflyName);
+   
+
+    if (butterflyInfo) {
+        // Display the butterfly information
+        displayButterflyInfo(butterflyName);
+    } else {
+        // Handle case where the prediction does not match a butterfly in the dex CSV
+        console.log(bestPrediction + " does not match any butterfly in the dex CSV.");
+    }
+    }
+
+    function uploadImage() {
+        document.getElementById('upload').click();
+    }
+
+    async function handleImageUpload(event) {
+        if (!model) await loadModel();
+
+        const image = event.target.files[0];
+        const imageElement = new Image();
+        const reader = new FileReader();
+        const imageContainer = document.getElementById("image-container");
+
+        reader.onload = async function(e) {
+            imageElement.src = e.target.result;
+            imageContainer.innerHTML = ""; // Clear previous image
+            imageContainer.appendChild(imageElement);
+
+            // Wait for the image to load before making a prediction
+            imageElement.onload = async function() {
+                const prediction = await model.predict(imageElement);
+                displayPredictions(prediction);
+            }
+        }
+        reader.readAsDataURL(image);
+    }
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const imageContainer = document.getElementById('image-container');
+    const webcamContainer = document.getElementById('webcam-container');
+    
+    // Use an existing img tag within the image container or create a new one
+    let imageElement = imageContainer.querySelector('img');
+    if (!imageElement) {
+        imageElement = document.createElement('img');
+        imageContainer.appendChild(imageElement);
+    }
+    
+    document.getElementById('uploadImage').addEventListener('click', function(event) {
+        const fileInput = event.target.previousElementSibling;
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imageElement.src = e.target.result;
+                document.getElementById('image-container').style.display = "block";
+                document.getElementById('webcam-container').style.display = "none";
+                imageContainer.style.display = 'block';
+                webcamContainer.style.display = 'none';
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    document.getElementById('camera').addEventListener('click', function() {
+        document.getElementById('webcam-container').style.display = "block";
+        document.getElementById('image-container').style.display = "none";
+    });
+});
+</script>
+
+
+<script>
+    function displayButterflyInfo(butterflyName) {
+        // Assuming dex is an array of objects loaded from the CSV
+        let dex = JSON.parse('{{ dex | safe }}');
+
+        let butterflyInfo = dex.find(butterfly => butterfly.Butterfly === butterflyName);
+    
+        if (butterflyInfo) {
+            let table = document.createElement('table');
+            table.classList.add('table'); // Add Bootstrap class for styling
+    
+            for (let key in butterflyInfo) {
+                let row = document.createElement('tr');
+    
+                let cellKey = document.createElement('td');
+                cellKey.textContent = key;
+                row.appendChild(cellKey);
+    
+                let cellValue = document.createElement('td');
+                cellValue.textContent = butterflyInfo[key];
+                row.appendChild(cellValue);
+    
+                table.appendChild(row);
+            }
+    
+             // Create the button
+       // Create the button
+let button = document.createElement('a');
+button.textContent = 'View Dex';
+button.href = '/Butterfly/' + encodeURIComponent(butterflyName);
+button.classList.add('btn', 'btn-primary'); // Add Bootstrap classes for styling
+
+        // Create additional HTML
+        let additionalHTML = document.createElement('div');
+        additionalHTML.innerHTML = '<p style="margin: 25px;"><img src="./static/images/' + encodeURIComponent(butterflyName) + '.jpg"></p>';
+
+        // Append the button, the additional HTML, and the table to the container
+        let container = document.getElementById('info-container');
+        container.innerHTML = ''; // Clear previous info
+        container.appendChild(button);
+        container.appendChild(additionalHTML);
+        container.appendChild(table);
+        }
+    }
+</script>
+{% endblock %}

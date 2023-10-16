@@ -1,0 +1,146 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="update-csv-url" content="/update-csv">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Butterfly AI</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+      <!-- Google Material Design CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/12.0.0/material-components-web.min.css">
+  <script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/12.0.0/material-components-web.min.js"></script>
+
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/styles.css">
+ 
+
+  <link rel="icon" href="static/img/favicon.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
+
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+  
+
+
+</head>
+
+
+      <div class="container-full">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<!-- Load Esri Leaflet from CDN -->
+<script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+    <style>
+      html,
+      body,
+      #map {
+        padding: 0;
+        margin: 0;
+        height: 97%;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        color: #323232;
+      }
+    </style>
+    </head>
+   
+      
+      
+      <body class="bg-light">
+
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0021a5;">
+          <div class="container-fluid">
+           <a class="navbar-brand" href="/">Butterfly AI</a>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main_nav">
+           <ul class="navbar-nav">
+         
+             <li class="nav-item"><a class="nav-link" href="/">Dex</a></li>
+             <li class="nav-item"><a class="nav-link" href="/camera">Camera</a></li>
+             <li class="nav-item"><a class="nav-link" href="/upload">Upload</a></li>
+             <li class="nav-item"><a class="nav-link" href="/map">Map</a></li>
+        
+           </ul>
+           </div> <!-- navbar-collapse.// -->
+          </div> <!-- container-fluid.// -->
+         </nav>
+      
+    
+      
+<!-- Load Leaflet Label from GitHub -->
+<script src="https://leaflet.github.io/Leaflet.label/leaflet.label.js"></script>
+<!-- Load Esri Leaflet Renderers from CDN -->
+<script src="https://cdn.jsdelivr.net/leaflet.esri.renderers/2.0.2/esri-leaflet-renderers.js"></script>
+<!-- Load Vector Icon from GitHub -->
+<script src="https://muxlab.github.io/Leaflet.VectorIcon/L.VectorIcon.js"></script>
+<!-- Load Leaflet Omnivore -->
+<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js"></script>
+<!-- Load L.esri.WebMap -->
+<script src="https://cdn.jsdelivr.net/leaflet.esri.webmap/0.4.0/esri-leaflet-webmap.js"></script>
+
+
+<div class="container-full"> 
+
+<div id="map"></div>
+
+</div>
+
+<script>
+  const apiKey = "AAPK4c97b520f55e44409b071e6a9da641a1PDuUrIsgV5tzOOBot0fD0rdwWJVVfJES-w77TFY8jUUk9PdQReyDMzcttzl_5rCZ";
+
+  const webmapId = "a8483651a58b444cbef84c81f2272262"; // Default WebMap ID
+  getIdfromUrl();
+
+  const webmap = L.esri.webMap(webmapId, { map: L.map("map") });
+  
+  
+ //var species_name = "Atlides_halesus"; 
+  //This would be "input" for user
+  
+
+  webmap.on("load", function () {
+    const overlayMaps = {};
+    webmap.layers.forEach(function (l) {
+      overlayMaps[l.title] = l.layer;
+    });
+     //"species_name".layer.addTo(webmap._map); 
+    //name is matched to layer and layer is added to webmap
+   L.control //delete after auto-layer adder is working
+      .layers({}, overlayMaps, {
+        position: "bottomleft"
+      })
+      .addTo(webmap._map);
+  });
+
+  function getIdfromUrl() {
+    const urlParams = location.search.substring(1).split("&");
+    for (let i = 0; urlParams[i]; i++) {
+      const param = urlParams[i].split("=");
+      if (param[0] === "id") {
+        webmapId = param[1];
+      }
+    }
+  }
+</script>
+</body>
+</html>
