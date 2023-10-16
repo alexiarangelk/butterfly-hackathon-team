@@ -5,7 +5,7 @@ Jay Rosen
 Amber Weihrich
 Sonya Babski
 
-- App created wtih React
+- App created wtih Python Flask
 - Using Github for project tracking, collaboration, and organization
 - Butterfly + flower identification classification model will be created with python
 
@@ -69,6 +69,8 @@ Leaflet JS Library
 
 
 ### > 🌼 "Try it out" links
+[Web App](https://www.butterfly.tools/)
+[DevPost](https://devpost.com/software/butterfly-ai)
 [Github Repository](https://github.com/alexiarangelk/butterfly-hackathon-team)
 [Model Process Document](https://github.com/alexiarangelk/butterfly-hackathon-team/blob/main/Butterfly%20Image%20Classifier%20Process.md)
 
@@ -86,4 +88,4 @@ JPG, PNG or GIF format, 5 MB max file size. For best results, use a 3:2 ratio.
 ![](https://hackmd.io/_uploads/B1N70nFW6.png)
 
 ### > 🌼Video demo link
-
+[Video](https://youtu.be/sHaF6n9hWH8?si=3c3SCl29Gx0IlY1p)
